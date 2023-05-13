@@ -1,8 +1,3 @@
-const API_POSTS = 'https://gorest.co.in/public/v2/posts';
-const API_COMMENTS = 'https://gorest.co.in/public/v2/comments';
-
-const postId = new URLSearchParams(window.location.search).get('id');
-
 const postsContainer = document.getElementById('posts-list');
 
 let posts = [];
@@ -17,7 +12,7 @@ const postsList = document.createElement('div');
 //create post link
     const postLink = document.createElement("a")
     postLink.classList.add("btn", "post-link")
-    postLink.href = `user-posts.html?id=${postId}`;
+    postLink.href = `user-posts.html?id=${userId}`;
     postLink.innerText = post.title
     
     //create status
@@ -50,19 +45,19 @@ function handleLoaded() {
     loader.classList.add('hidden');
 }
 
-function getProducts() {
-    return fetch(API_POSTS)
+function getPosts() {
+    return fetch(`${API_URL}/${userId}/posts`)
         .then(response =>{
             handleLoaded();
         if (!response.ok) {
-            throw new Error('Невдалось завантажити користувачів. Спробуйте пізніше');
+            throw new Error('Невдалось завантажити пости. Спробуйте пізніше');
         }
             // return  posts=[] <--if is empty-->
         return response.json()
     })
         .then((posts) => {
             if (!posts.length) {
-            const errorMessageBox = createMessageBox('Користувачі незнайдені');
+            const errorMessageBox = createMessageBox('пости незнайдені');
             postsContainer.appendChild(errorMessageBox, 'success');
             }
             posts.forEach(post => {
@@ -75,4 +70,4 @@ function getProducts() {
         postsContainer.appendChild(errorMessageBox, 'error');
     })
 }
-getProducts()
+getPosts()
