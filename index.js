@@ -7,9 +7,9 @@ let users = [];
 
 
 
-function createUserList(users) {
-const user = document.createElement('div');
-    user.classList.add('user');
+function createUserList(user) {
+const usersList = document.createElement('div');
+    usersList.classList.add('user');
     // create card body
     const usersBody = document.createElement('div');
     usersBody.classList.add('users-body');
@@ -17,13 +17,13 @@ const user = document.createElement('div');
 //create user link
     const userLink = document.createElement("a")
     userLink.classList.add("btn", "user-link")
-    userLink.href = `user.html?user_id=${users.id}`;
-    userLink.innerText = users.name
+    userLink.href = `user-posts.html?id=${user.id}`;
+    userLink.innerText = user.name
     
     //create status
     const userStatus = document.createElement("p")
     userStatus.classList.add("user-status")
-    userStatus.innerText = users.status
+    userStatus.innerText = user.status
 
     //append all
 
